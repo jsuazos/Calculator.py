@@ -52,14 +52,22 @@ while True:
         full_operation.append(''.join(current_num))
         current_num = []
         full_operation.append(event)
-        window['-TEXT-'].update('')
+        window['-TEXT-'].update(event)
 
     if event == 'Enter':
-        full_operation.append(''.join(current_num))
-        result = eval(' '.join(full_operation))
-        window['-TEXT-'].update(result)
-        current_num = list(map(str, str(result)))
-        full_operation = []
+        if full_operation:
+            try:
+                full_operation.append(''.join(current_num))
+                result = eval(' '.join(full_operation))
+                window['-TEXT-'].update(result)
+                current_num = list(map(str, str(result)))
+                full_operation = []
+            except:
+                current_num = []
+                full_operation = []
+                result = []
+                window['-TEXT-'].update('Err Math')  
+
         
 
     if event == 'C':
